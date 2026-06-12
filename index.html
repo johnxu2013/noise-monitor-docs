@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sound Meter - Professional Sound Level Measurement</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #00CED1;
+            --dark-bg: #1C1C1E;
+            --card-bg: #2C2C2E;
+            --text-primary: #FFFFFF;
+            --text-secondary: #8E8E93;
+            --gradient-start: #00CED1;
+            --gradient-end: #4169E1;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #000000 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+        }
+        
+        .app-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            border-radius: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            box-shadow: 0 10px 40px rgba(0, 206, 209, 0.3);
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .tagline {
+            font-size: 1.2em;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+        
+        .download-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 20px;
+        }
+        
+        .download-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 206, 209, 0.4);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 60px 0;
+        }
+        
+        .feature-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px;
+            transition: transform 0.2s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        
+        .section {
+            margin: 80px 0;
+        }
+        
+        .section h2 {
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .use-cases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .use-case {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .use-case h4 {
+            margin-bottom: 8px;
+            color: var(--primary-color);
+        }
+        
+        .use-case p {
+            color: var(--text-secondary);
+            font-size: 0.95em;
+        }
+        
+        .tech-specs {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+        
+        .tech-specs ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .tech-specs li {
+            padding: 15px;
+            background: var(--dark-bg);
+            border-radius: 8px;
+        }
+        
+        .tech-specs li::before {
+            content: "✓ ";
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--card-bg);
+            margin-top: 80px;
+        }
+        
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .screenshot-section {
+            margin: 60px 0;
+            text-align: center;
+        }
+        
+        .screenshots {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .screenshot-placeholder {
+            width: 250px;
+            height: 500px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            border: 2px solid var(--primary-color);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .screenshot-placeholder {
+                width: 200px;
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="app-icon">🎚️</div>
+            <h1>Sound Meter</h1>
+            <p class="tagline">Professional Sound Level Measurement for iOS</p>
+            <p class="tagline">Accurate decibel readings with industry-standard calculations</p>
+            <a href="#" class="download-button">Download on the App Store</a>
+        </header>
+        
+        <section class="features">
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Real-Time Monitoring</h3>
+                <p>Get instant, accurate sound level measurements with a beautiful, easy-to-read gauge display. Track current and peak decibel levels in real-time.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Professional Standards</h3>
+                <p>Supports OSHA, NIOSH, and EU standards with A, C, and Z weighting filters for accurate occupational noise exposure measurements.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+                <h3>Advanced Calculations</h3>
+                <p>Calculate Leq (equivalent continuous sound level), TWA (time-weighted average), and noise dose with professional-grade accuracy.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>Session History</h3>
+                <p>Track and review all your measurements. View detailed session statistics including average levels, peaks, and exposure calculations.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">⚙️</div>
+                <h3>Device Calibration</h3>
+                <p>Calibrate your device for maximum accuracy using a reference sound source. Save calibration settings for consistent measurements.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>Beautiful Design</h3>
+                <p>Modern interface with animated backgrounds that respond to sound levels. Risk level indicators help you quickly assess noise safety.</p>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>Perfect For</h2>
+            <div class="use-cases">
+                <div class="use-case">
+                    <h4>🏭 Workplace Safety</h4>
+                    <p>Monitor occupational noise exposure and ensure compliance with safety standards</p>
+                </div>
+                <div class="use-case">
+                    <h4>🏗️ Construction Sites</h4>
+                    <p>Track noise levels and calculate exposure limits for workers</p>
+                </div>
+                <div class="use-case">
+                    <h4>🎵 Music Venues</h4>
+                    <p>Ensure safe sound levels during concerts and events</p>
+                </div>
+                <div class="use-case">
+                    <h4>🏠 Home & Office</h4>
+                    <p>Check ambient noise levels for comfort and productivity</p>
+                </div>
+                <div class="use-case">
+                    <h4>🔊 Audio Engineering</h4>
+                    <p>Quick reference measurements for sound professionals</p>
+                </div>
+                <div class="use-case">
+                    <h4>🏫 Educational Settings</h4>
+                    <p>Teach students about sound, acoustics, and hearing protection</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section tech-specs">
+            <h2>Technical Specifications</h2>
+            <ul>
+                <li>50ms update rate for responsive measurements</li>
+                <li>A, C, and Z frequency weighting filters</li>
+                <li>OSHA, NIOSH, and EU standard compliance</li>
+                <li>Leq, TWA, and noise dose calculations</li>
+                <li>30-130 dB measurement range</li>
+                <li>10-sample buffer smoothing algorithm</li>
+                <li>Device-specific calibration support</li>
+                <li>Unlimited measurement session storage</li>
+                <li>Export capabilities for professional reporting</li>
+                <li>Maximum exposure time calculations</li>
+            </ul>
+        </section>
+        
+        <section class="section">
+            <h2>Understanding Sound Levels</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <h3>Safe (30-60 dB)</h3>
+                    <p>Normal conversation, quiet office, library. Safe for prolonged exposure.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Moderate (60-80 dB)</h3>
+                    <p>Traffic, restaurant, vacuum cleaner. Generally safe with occasional breaks.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Caution (80-90 dB)</h3>
+                    <p>Heavy traffic, power tools. Limit exposure time and consider hearing protection.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Danger (90-110 dB)</h3>
+                    <p>Concerts, machinery, power equipment. Hearing protection required.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Critical (110+ dB)</h3>
+                    <p>Rock concerts, sirens, firearms. Immediate hearing damage risk.</p>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>&copy; 2026 Sound Meter. All rights reserved.</p>
+            <p style="margin-top: 15px;">
+                <a href="privacy.html">Privacy Policy</a> | 
+                <a href="mailto:support@example.com">Support</a>
+            </p>
+            <p style="margin-top: 20px; font-size: 0.9em;">
+                Note: While this app provides accurate measurements, for critical professional applications, 
+                dedicated sound level meters should be used. Results may vary by device.
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
